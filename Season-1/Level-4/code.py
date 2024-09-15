@@ -132,6 +132,10 @@ class DB_CRUD_ops(object):
             db_con = con.create_connection(db_path)
             cur = db_con.cursor()
 
+            if ';' in stock_symbol:
+                stock_symbol = stock_symbol.split(';')[0]
+                stock_symbol = stock_symbol.replace("'", "")
+
             res = "[METHOD EXECUTED] get_stock_price\n"
             query = "SELECT price FROM stocks WHERE symbol = '" + stock_symbol + "'"
             res += "[QUERY] " + query + "\n"
